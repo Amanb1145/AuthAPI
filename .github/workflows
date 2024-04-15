@@ -1,27 +1,27 @@
-name: Django CI
+name: CI
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     services:
-      postgres:
-        image: postgres:12
-        env:
+      redis:
+        image: redis:latest
+        ports:
+          - "6379:6379"
+      db:
+        image: postgres:latest
+        ports:
+          - "5432:5432"
+        environment:
+          POSTGRES_DB: designtribe
           POSTGRES_USER: dbuser
           POSTGRES_PASSWORD: dbpassword
-          POSTGRES_DB: designtribe
-        ports:
-          - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: Checkout repository
@@ -37,6 +37,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Run migrations
+        run: python manage.py migrate
+
+      - name: Start Celery worker
+        run: celery -A account worker --loglevel=info
+
+      - name: Start Celery beat
+        run: celery -A account beat --loglevel=info
+
       - name: Run tests
-        run: |
-          python manage.py test
+        run: python manage.py test
