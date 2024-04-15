@@ -120,4 +120,3 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-You can customize this template by replacing placeholders with your actual project details and adding any additional sections or information specific to your project.
