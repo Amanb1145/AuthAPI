@@ -72,7 +72,6 @@ This project is a Django-based web application that utilizes Docker for containe
 
 ## Configuration
 
-- Update environment variables in the `.env` file as needed.
 - Configure Django settings in the `settings.py` file.
 - Customize Celery tasks in the `tasks.py` file.
 
@@ -100,15 +99,13 @@ project/
 │   ├── serializers.py
 │   ├── tasks.py
 │   └── views.py
-│
-├── celery/
-│   ├── __init__.py
 │   └── celery.py
+│
+
 │
 ├── Dockerfile
 ├── docker-compose.yml
 ├── entrypoint.sh
-├── .env
 ├── manage.py
 └── README.md
 ```
