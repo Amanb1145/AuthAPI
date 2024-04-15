@@ -27,7 +27,7 @@ This project is a Django-based web application that utilizes Docker for containe
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone [<repository-url>](https://github.com/Amanb1145/AuthAPI.git)
    ```
 
 2. Navigate to the project directory:
